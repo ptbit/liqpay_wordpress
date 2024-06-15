@@ -1,11 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>liqpay plugin</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="left">
+          <form
+            class="donation__form"
+            method="POST"
+            action="https://www.liqpay.ua/api/3/checkout"
+            accept-charset="utf-8"
+          >
+            <div class="donation__tabs">
+              <div class="tabs__option active" data-type="1">
+                Разовий внесок
+              </div>
+              <div class="tabs__option" data-type="2">Підписка</div>
+            </div>
+            <!-- <input type="text" /> -->
+
+            <div class="donation__sum">
+              <input
+                id="donation__value"
+                class="donation__sum--input"
+                type="text"
+                oninput="checkInput(event)"
+                value="1"
+              />
+              <!-- currency__arrow--active -->
+              <input id="form_value" type="hidden" name="data" value="" />
+              <input
+                id="form_signature"
+                type="hidden"
+                name="signature"
+                value=""
+              />
+              <!-- <span class="donation__sum--currency">UAH</span> -->
+              <div class="currency__container">
+                <div class="currency__select">
+                  <div class="currency__arrow">
+                    <div class="arrow"></div>
+                  </div>
+                  <div class="currency__name">UAH</div>
+                </div>
+                <ul class="currency__list hidden">
+                  <li class="currency__item">UAH</li>
+                  <li class="currency__item">USD</li>
+                  <li class="currency__item">EUR</li>
+                </ul>
+              </div>
+            </div>
+            <div class="donation__options">
+              <button class="donation__btn" type="button" data-val="200">
+                <span class="donation__btn--text">+ 200</span>
+                <span class="donation__btn--currency">UAH</span>
+              </button>
+              <button class="donation__btn" type="button" data-val="500">
+                <span class="donation__btn--text">+ 500</span>
+                <span class="donation__btn--currency">UAH</span>
+              </button>
+              <button class="donation__btn" type="button" data-val="1000">
+                <span class="donation__btn--text">+ 1000</span>
+                <span class="donation__btn--currency">UAH</span>
+              </button>
+            </div>
+
+            <!-- <input type="image" src="//static.liqpay.ua/buttons/payUk.png" /> -->
+            <button class="donation__submitBtn" type="submit">
+              <span class="donation__submitBtn--text"> Підтримати разово</span>
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="donation__submitBtn--svg"
+              >
+                <path
+                  d="M9.334 22.67L22.667 9.335M9.334 9.336h13.333v13.333"
+                  stroke="#fff"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </button>
+            <div class="form_content"></div>
+          </form>
+        </div>
+
+        <div class="right">
+          <h2>Реквізити рахунку факультету у гривні</h2>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
 </html>
