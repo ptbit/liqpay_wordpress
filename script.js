@@ -24,25 +24,12 @@ let currentCurrency = 'UAH';
 const valueObj = {
   version: '3',
   public_key: 'sandbox_i87078030762',
-  action: 'pay',
+  action: 'paydonate',
   amount: input.value,
   currency: currentCurrency,
   description: 'description text',
   order_id: 'order_id_1',
 };
-
-submitBtn.addEventListener('click', () => {
- 
-  const form = document.querySelector('form');
-  const submitBtn = document.createElement('button');
-  submitBtn.classList.add('submit-form-btn');
-  submitBtn.type = 'submit';
-  submitBtn.hidden = true;
-  submitBtn.textContent = 'Click me!';
-  form.appendChild(submitBtn);
-
-  document.querySelector('.submit-form-btn').click();
-});
 
 const UAHValues = [200, 500, 1000];
 const USDValues = [20, 100, 300];
@@ -56,8 +43,10 @@ tabs.forEach((tab) => {
       });
       tab.classList.add('active');
       if (tab.dataset.type === '1') {
+        valueObj.action = 'paydonate';
         submitBtnText.textContent = 'Підтримати разово';
       } else if (tab.dataset.type === '2') {
+        valueObj.action = 'subscribe';
         submitBtnText.textContent = ' Підтримати щомісячно';
       }
     }
@@ -131,6 +120,7 @@ currencyItems.forEach((item) => {
     }
 
     valueObj.currency = currentCurrency;
+
     createForm(valueObj);
   });
 });
@@ -142,13 +132,18 @@ currencySelector.addEventListener('click', () => {
 });
 
 function createForm(obj) {
-  fetch(`/signer.php?amount=${+obj.amount}&currency=${obj.currency}`)
+  fetch(
+    `/getform.php?type=${obj.action}&amount=${+obj.amount}&currency=${
+      obj.currency
+    }`
+  )
     .then((response) => response.json())
     .then((data) => {
       const { data: encodedData, signature } = data;
 
       formValue.value = encodedData;
       formSignature.value = signature;
+      console.log('CHANGE FORM DATA');
     })
     .catch((error) => {
       console.error('Error:', error);

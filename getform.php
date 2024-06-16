@@ -3,12 +3,13 @@ include "LiqPay.php";
 $public_key = 'sandbox_i87078030762';
 $private_key = 'sandbox_kND4HBerzNqiMYWjZzoqTJGNYD32ON8otLxP5zm0';
 
+$type = $_GET['type'];
 $amount = $_GET['amount'];
 $currency = $_GET['currency'];
 
 $liqpay = new LiqPay($public_key, $private_key);
 $phpdata = $liqpay->ptb_form(array(
-'action'         => 'pay',
+'action'         => $type,
 'amount'         => $amount,
 'currency'       => $currency,
 'description'    => 'description text',
